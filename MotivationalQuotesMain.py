@@ -1,8 +1,9 @@
 import requests
 import random
+import time
+import tkinter as tk
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
-import tkinter as tk
 
 # This is a program that will produce motivational quotes on screen
 
@@ -33,11 +34,12 @@ quotes = []
 quoteTags = htmlSoup.find_all(lambda tag: tag.name == 'li' and not tag.attrs)
 for tag in quoteTags:
 	quotes.append(tag.text)
+while(True):
+	# randomly picking a quote to display
+	random.seed()
+	quoteIndex = random.randint(0,len(quotes)-1)
+	displayQuote = quotes[quoteIndex]
 
-# randomly picking a quote to display
-random.seed()
-quoteIndex = random.randint(0,len(quotes)-1)
-displayQuote = quotes[quoteIndex]
-
-# creating a pop up window to display the quote
-popupmsg(displayQuote, "Motivational Quote")
+	# creating a pop up window to display the quote
+	popupmsg(displayQuote, "Motivational Quote")
+	time.sleep(1800)
