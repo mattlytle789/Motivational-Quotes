@@ -2,10 +2,21 @@ import requests
 import random
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
+import tkinter as tk
 
 # This is a program that will produce motivational quotes on screen
 
-# list of websites to be scraped for quotes
+# Function to create a pop up window 
+def popupmsg(msg, title):
+	root = tk.Tk()
+	root.title(title)
+	label = tk.Label(root, text=msg)
+	label.pack(side="top",fil="x",pady=10)
+	B1 = tk.Button(root, text="Close", command=root.destroy)
+	B1.pack()
+	root.mainloop()
+
+# website to be scraped for quotes
 url = "https://www.shopify.com/blog/motivational-quotes"
 
 # Accessing a webiste and getting the html data
@@ -27,4 +38,6 @@ for tag in quoteTags:
 random.seed()
 quoteIndex = random.randint(0,len(quotes)-1)
 displayQuote = quotes[quoteIndex]
-print(displayQuote)
+
+# creating a pop up window to display the quote
+popupmsg(displayQuote, "Motivational Quote")
